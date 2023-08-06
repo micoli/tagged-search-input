@@ -1,0 +1,70 @@
+@import '@radix-ui/colors/black-alpha.css';
+@import '@radix-ui/colors/mauve.css';
+@import '@radix-ui/colors/violet.css';
+
+@import './Calendar.css';
+@import './Chip.css';
+@import './Gridlist.css';
+@import './Menubar.css';
+@import './Popover.css';
+@import './Scrollarea.css';
+@import './Text.css';
+
+/* reset */
+button,
+fieldset,
+input {
+    all: unset;
+}
+
+input{
+    text-align:left;
+}
+button{
+    cursor: pointer;
+}
+
+.tag-action{
+    padding-left: 0px;
+    text-decoration-line: underline;
+    cursor: pointer;
+    text-decoration-style: dashed;
+}
+.tag-action:disabled{
+    text-decoration-line: none;
+    cursor: not-allowed;
+}
+.tag-action-value{
+}
+.input-wrapper{
+    width: 900px;
+    border: 1px solid #d9d9d9;
+    background-color: #fff;
+    border-radius: 4px;
+    padding: 1px;
+    display: flex;
+    flex-wrap: wrap;
+
+    &:hover {
+        border-color: #40a9ff;
+    }
+
+    &.focused {
+        border-color: #40a9ff;
+        box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.2);
+    }
+
+    & input {
+        background-color: #fff;
+        color: rgba(0,0,0,.85);
+        height: 30px;
+        box-sizing: border-box;
+        padding: 4px 6px;
+        width: 0;
+        min-width: 30px;
+        flex-grow: 1;
+        border: 0;
+        margin: 0;
+        outline: 0;
+    }
+}
