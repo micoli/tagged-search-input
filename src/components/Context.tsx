@@ -1,11 +1,13 @@
 import { createContext, useContext, useState, JSX } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 import {
   getSmartTagFieldByLabel,
   SmartTagField,
   SmartTagFieldValues,
   SmartTagOption,
+  SmartTagOptionArgument,
   SmartTagOptionType,
-} from '../SmartTagField';
+} from './SmartTagField.ts';
 
 const SearchContext = createContext<{
   smartTags: SmartTagField[];
@@ -13,11 +15,11 @@ const SearchContext = createContext<{
   //setValues: (values: SmartTagOption[]) => void;
   addField: (fieldName: SmartTagOptionType) => void;
   updateAt: (
-    index: number,
-    _newOperator: string,
-    _newValue: SmartTagFieldValues,
+    id: string,
+    newOperator: string,
+    newValue: SmartTagFieldValues,
   ) => void;
-  deleteAt: (_index: number) => void;
+  deleteAt: (id: string) => void;
 } | null>(null);
 
 export const useSmartTagSearch = () => {
@@ -33,16 +35,21 @@ export const useSmartTagSearch = () => {
 
 export const SearchContextProvider = ({
   smartTags,
+  initialValues,
   children,
 }: {
   smartTags: SmartTagField[];
+  initialValues: SmartTagOptionArgument[];
   children: JSX.Element;
 }) => {
-  const [values, setValues] = useState<SmartTagOption[]>([]);
+  const [values, setValues] = useState<SmartTagOption[]>(
+    initialValues.map((value) => ({ ...value, id: uuidv4() })),
+  );
   const addField = (fieldName: SmartTagOptionType) => {
     setValues([
       ...values,
       {
+        id: uuidv4(),
         field: fieldName,
         operator: getSmartTagFieldByLabel(smartTags, fieldName).operators[0]
           .label,
@@ -51,21 +58,22 @@ export const SearchContextProvider = ({
     ]);
   };
 
-  const deleteAt = (index: number) => {
-    setValues([...values].filter((_, _index) => index !== _index));
+  const deleteAt = (id: string) => {
+    setValues(values.filter((option) => id !== option.id));
   };
 
   const updateAt = (
-    index: number,
+    id: string,
     newOperator: string,
     newValue: SmartTagFieldValues,
   ) => {
     setValues(
-      [...values].map((_oldValue, _index) => {
-        return index !== _index
-          ? _oldValue
+      [...values].map((option) => {
+        return option.id !== id
+          ? option
           : {
-              field: _oldValue.field,
+              id,
+              field: option.field,
               operator: newOperator,
               value: newValue,
             };

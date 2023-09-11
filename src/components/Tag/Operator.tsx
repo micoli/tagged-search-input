@@ -2,7 +2,7 @@ import { useState } from 'react';
 import {
   getSmartTagOperatorOptionByLabel,
   SmartTagField,
-} from '../../SmartTagField.ts';
+} from '../SmartTagField.ts';
 import * as Menubar from '@radix-ui/react-menubar';
 
 const Operator = ({

@@ -1,4 +1,4 @@
-import { SmartTagField, SmartTagOptionArgument } from '../SmartTagField';
+import { SmartTagField, SmartTagOptionArgument } from './SmartTagField.ts';
 import { SmartTag } from './index.ts';
 import { JsonView, allExpanded, defaultStyles } from 'react-json-view-lite';
 import 'react-json-view-lite/dist/index.css';

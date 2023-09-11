@@ -4,7 +4,7 @@ import {
   EditorTypeEnum,
   SmartTagEditor,
   SmartTagFieldValues,
-} from '../../SmartTagField';
+} from '../SmartTagField.ts';
 
 import {
   Button,

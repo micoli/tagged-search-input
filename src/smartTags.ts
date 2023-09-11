@@ -2,7 +2,7 @@ import {
   EditorTypeEnum,
   SmartTagField,
   SmartTagFieldValue,
-} from './SmartTagField';
+} from './components/SmartTagField.ts';
 
 export const smartTags: SmartTagField[] = [
   {

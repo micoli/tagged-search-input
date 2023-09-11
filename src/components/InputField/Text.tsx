@@ -3,16 +3,13 @@ import {
   EditorProps,
   EditorTypeEnum,
   SmartTagEditor,
-  SmartTagFieldValues,
-} from '../../SmartTagField';
-
+} from '../SmartTagField.ts';
 import { TextFieldInput, TextFieldRoot } from '@radix-ui/themes';
 
 const Component = ({ initialValue, onValueChange, onClose }: EditorProps) => {
   const [innerValue, setInnerValue] = useState<string>(
-    initialValue?.at(0)?.value ?? '0',
+    initialValue?.at(0)?.value ?? '',
   );
-
   const validateAndClose = () => {
     onValueChange([{ value: innerValue, label: innerValue }]);
     onClose();
@@ -22,7 +19,6 @@ const Component = ({ initialValue, onValueChange, onClose }: EditorProps) => {
     <>
       <TextFieldRoot>
         <TextFieldInput
-          type="number"
           placeholder="Refine…"
           value={innerValue}
           onChange={(event) => setInnerValue(event.currentTarget.value)}
@@ -34,15 +30,16 @@ const Component = ({ initialValue, onValueChange, onClose }: EditorProps) => {
           }}
         />
       </TextFieldRoot>
+
       <button onClick={validateAndClose}>Ok</button>
     </>
   );
 };
 
 const editor: SmartTagEditor = {
-  type: EditorTypeEnum.numeric,
+  type: EditorTypeEnum.text,
   component: Component,
-  display: (value: SmartTagFieldValues) => <>{value?.at(0)?.value ?? 0}</>,
+  display: (value) => <>{value?.at(0)?.value ?? ''}</>,
 };
 
 export default editor;

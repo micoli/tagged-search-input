@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { SmartTagField, SmartTagFieldValues } from '../../SmartTagField.ts';
+import { SmartTagField, SmartTagFieldValues } from '../SmartTagField.ts';
 
 import {
   createEditor,

@@ -1,4 +1,4 @@
-import Autocomplete from './Autocomplete';
+import Autocomplete from './Autocomplete.tsx';
 import DateValue from './Date.tsx';
 import NumericValue from './Numeric.tsx';
 import TextValue from './Text.tsx';
@@ -7,7 +7,7 @@ import {
   EditorTypeEnum,
   SmartTagEditor,
   SmartTagFieldValues,
-} from '../../SmartTagField';
+} from '../SmartTagField.ts';
 
 const map = (type: EditorTypeEnum): SmartTagEditor => {
   switch (type) {

@@ -17,6 +17,9 @@
     text-decoration: none;
     justify-content: center;
 }
+.chip:focus{
+    border:1px solid black;
+}
 .chip-head{
     display: flex;
     position: relative;

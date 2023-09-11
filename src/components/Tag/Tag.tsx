@@ -3,7 +3,7 @@ import {
   getSmartTagFieldByLabel,
   SmartTagFieldValues,
   SmartTagOption,
-} from '../../SmartTagField.ts';
+} from '../SmartTagField.ts';
 
 import { SmartTag } from '../index.ts';
 import { Flex } from '@radix-ui/themes';
@@ -23,7 +23,8 @@ const Tag = ({ option }: { option: SmartTagOption }) => {
     >
       <div className={'chip-content'}>
         {option.field}
-        {'〈'}
+        &nbsp;
+        {'['}
         <SmartTag.Operator
           field={field}
           initialValue={innerOperator}
@@ -32,7 +33,7 @@ const Tag = ({ option }: { option: SmartTagOption }) => {
             updateAt(option.id, newOperator, innerValue);
           }}
         />
-        {'〉'}
+        {']'}&nbsp;
         <SmartTag.Value
           field={field}
           initialValue={option.value}

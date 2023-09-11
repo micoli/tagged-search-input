@@ -1,13 +1,8 @@
 import './App.css';
-import GitlabSearchInputTextHook from './components/Gitlab/GitlabSearchInputTextHook.tsx';
-import GitlabSearchInputText from './components/Gitlab/GitlabSearchInputText.tsx';
-import { Divider, Typography } from '@mui/material';
-import { smartTags } from './components/smartTags.ts';
-import { SmartTag as SmartTagMUI } from './components/LinearMUI';
-import { SmartTag as SmartTagRadix } from './components/LinearRadix';
+import { smartTags } from './smartTags.ts';
+import { SmartTag as SmartTagRadix } from './components';
 import '@radix-ui/themes/styles.css';
 import { Theme } from '@radix-ui/themes';
-
 const initialValues = [
   {
     field: 'name',
@@ -42,42 +37,24 @@ const initialValues = [
     value: [{ value: '2023-01-01', label: '2023-01-01' }],
   },
 ];
-function App() {
+const App = () => {
   return (
-    <div style={{ width: 900 }}>
-      <Typography typography={'H1'}>
-        Linear Radix SearchInputTextHook
-      </Typography>
-      <Theme
-        appearance="light"
-        accentColor="purple"
-        grayColor="slate"
-        panelBackground="solid"
-        scaling="90%"
-      >
+    <Theme
+      appearance="light"
+      accentColor="purple"
+      grayColor="slate"
+      panelBackground="solid"
+      scaling="90%"
+    >
+      <h1>Radix SearchInputTextHook</h1>
+      <div style={{ width: 900 }}>
         <SmartTagRadix.SearchInputField
           smartTags={smartTags}
-          debug
           initialValues={initialValues}
         />
-      </Theme>
-
-      <Divider />
-
-      <Typography typography={'H1'}>Linear MUI SearchInputTextHook</Typography>
-      <SmartTagMUI.SearchInputField smartTags={smartTags} />
-
-      <Divider />
-
-      <Typography typography={'H1'}>GitlabSearchInputTextHook</Typography>
-      <GitlabSearchInputTextHook />
-
-      <Divider />
-
-      <Typography typography={'H1'}>GitlabSearchInputText</Typography>
-      <GitlabSearchInputText />
-    </div>
+      </div>
+    </Theme>
   );
-}
+};
 
 export default App;

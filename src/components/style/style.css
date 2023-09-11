@@ -2,13 +2,13 @@
 @import '@radix-ui/colors/mauve.css';
 @import '@radix-ui/colors/violet.css';
 
-@import './Calendar.css';
-@import './Chip.css';
-@import './Gridlist.css';
-@import './Menubar.css';
-@import './Popover.css';
-@import './Scrollarea.css';
-@import './Text.css';
+@import 'Calendar.css';
+@import 'Chip.css';
+@import 'Gridlist.css';
+@import 'Menubar.css';
+@import 'Popover.css';
+@import 'Scrollarea.css';
+@import 'Text.css';
 
 /* reset */
 button,
@@ -35,6 +35,22 @@ button{
     cursor: not-allowed;
 }
 .tag-action-value{
+}
+
+button.add-filter{
+    --base-button-height: var(--space-3);
+    border-radius: max(var(--radius-2),var(--radius-full));
+    border: 1px solid #888888;
+    padding: 2px;
+}
+button.popover-ok{
+    --base-button-height: var(--space-3);
+    border-radius: max(var(--radius-2),var(--radius-full));
+    border: 1px solid #888888;
+    padding: 2px;
+}
+button.popover-ok:focus{
+    border: 1px dashed #888888;
 }
 .input-wrapper{
     width: 900px;

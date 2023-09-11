@@ -6,7 +6,7 @@ import {
   SmartTagEditor,
   SmartTagFieldValue,
   SmartTagFieldValues,
-} from '../../SmartTagField';
+} from '../SmartTagField.ts';
 import { TextFieldInput, TextFieldRoot } from '@radix-ui/themes';
 import * as ScrollArea from '@radix-ui/react-scroll-area';
 import type { GridListProps, ItemProps } from 'react-aria-components';
@@ -106,6 +106,7 @@ const Component = ({
       </ScrollArea.Root>
       <button
         disabled={valueIds === 'all' || valueIds.size === 0}
+        className={'popover-ok'}
         onClick={validateAndClose}
       >
         Ok
