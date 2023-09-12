@@ -3,6 +3,7 @@ import {
   SmartTagField,
   SmartTagFieldValue,
 } from './components/SmartTagField.ts';
+import { persons } from './fake.ts';
 
 export const smartTags: SmartTagField[] = [
   {
@@ -10,22 +11,28 @@ export const smartTags: SmartTagField[] = [
     label: 'Name',
     editorType: EditorTypeEnum.autocomplete,
     operators: [
-      { label: '=', value: '=' },
+      { label: 'not-in', value: 'not in' },
       { label: 'in', value: 'in' },
     ],
-    values: async (_inputValue) =>
-      Promise.resolve<SmartTagFieldValue[]>([
-        {
-          value: 'free',
-          label: _inputValue,
-        },
-        ...['name-b', 'name-c', 'name-d']
-          .filter((x) => x)
-          .map((label) => ({
-            value: label,
-            label,
+    values: async (inputValue) => {
+      if (inputValue === '') {
+        return Promise.resolve<SmartTagFieldValue[]>(
+          persons.slice(0, 10).map((person) => ({
+            value: person.id,
+            label: `${person.firstName} ${person.lastName} (${person.email})`,
           })),
-      ]),
+        );
+      }
+      const lower = inputValue.toLowerCase();
+      return Promise.resolve<SmartTagFieldValue[]>(
+        persons
+          .filter((person) => person.searchable.includes(lower))
+          .map((person) => ({
+            value: person.id,
+            label: `${person.firstName} ${person.lastName} (${person.email})`,
+          })),
+      );
+    },
   },
   {
     field: 'comment',

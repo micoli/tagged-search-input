@@ -8,8 +8,22 @@ const initialValues = [
     field: 'name',
     operator: 'in',
     value: [
-      { value: 'name-b', label: 'name-b' },
-      { value: 'name-c', label: 'name-c' },
+      {
+        value: '246277bd-7f0e-4024-93ac-edf29a1cbac9',
+        label: 'Anastacio Hintz (anxiousMelanie@virgilio.it)',
+      },
+      {
+        value: 'e1880173-2f5e-4f19-b5f6-925c046361da',
+        label: 'Jordi Ondricka (homelyLawrence@comcast.net)',
+      },
+      {
+        value: '9e97ece8-6531-4ac0-a54e-dad30ec4dab2',
+        label: 'Vernon Lebsack (poisedJulie@ig.com.br)',
+      },
+      {
+        value: '9def7af7-9320-4169-97cb-dcd996869f6a',
+        label: 'Demond Gorczany (Jennylight@live.nl)',
+      },
     ],
   },
   {

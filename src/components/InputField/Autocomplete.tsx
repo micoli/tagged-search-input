@@ -60,19 +60,31 @@ const Component = ({
   );
   const [textValue, setTextValue] = useState<string>('');
   const [items, setItems] = useState<(SmartTagFieldValue & { id: string })[]>(
-    [],
+    initialList.map((item) => ({ id: item.value, ...item })),
   );
 
   useEffect(() => {
-    generateFieldValues(field, textValue).then((items) =>
-      setItems((items ?? []).map((item) => ({ id: item.value, ...item }))),
-    );
+    generateFieldValues(field, textValue).then((items) => {
+      const previousValues = getSelectedItems();
+      const previousSelectedIds = previousValues.map((item) => item.value);
+      setItems([
+        ...previousValues,
+        ...(items ?? [])
+          .filter((item) => !previousSelectedIds.includes(item.value))
+          .map((item) => ({ id: item.value, ...item })),
+      ]);
+      setValueIds(new Set(previousSelectedIds));
+    });
   }, [textValue]);
 
-  const validateAndClose = () => {
-    onValueChange(
-      items.filter((value) => valueIds === 'all' || valueIds.has(value.value)),
+  const getSelectedItems = () => {
+    return items.filter(
+      (value) => valueIds === 'all' || valueIds.has(value.value),
     );
+  };
+
+  const validateAndClose = () => {
+    onValueChange(getSelectedItems());
     onClose();
   };
 
@@ -94,13 +106,9 @@ const Component = ({
             onSelectionChange={setValueIds}
           >
             {Array.isArray(items) &&
-              items
-                .filter(
-                  (item) => textValue == '' || item.label.includes(textValue),
-                )
-                .map((item) => (
-                  <InnerItem key={item.value} item={item}></InnerItem>
-                ))}
+              items.map((item) => (
+                <InnerItem key={item.value} item={item}></InnerItem>
+              ))}
           </InnerGridList>
         </ScrollArea.Viewport>
       </ScrollArea.Root>
@@ -115,12 +123,29 @@ const Component = ({
   );
 };
 
+const ellipsis = (text: string, max: number) => {
+  if (text.length > max) {
+    return text.substring(0, max) + '…';
+  }
+  return text;
+};
 const editor: SmartTagEditor = {
   type: EditorTypeEnum.autocomplete,
   component: Component,
-  display: (value: SmartTagFieldValues) => (
-    <>{value?.map((item) => item.label).join(',')}</>
-  ),
+  display: (value: SmartTagFieldValues) => {
+    const list = value ?? [];
+    return (
+      <>
+        {value
+          ?.map((item) => {
+            return ellipsis(item.label, 10);
+          })
+          .slice(0, 3)
+          .join(',')}
+        {list.length > 3 && `(${list.length})`}
+      </>
+    );
+  },
 };
 
 export default editor;
